@@ -57,6 +57,53 @@ public class PublicacionDao extends DAO {
 		return publicacion;
 	}
 	
+	public void actualizarPublicacion(Publicacion publicacion) {
+		EntityManager entidad = devolverEntityManager();
+		EntityTransaction transaction = null;
+		
+		try {
+			transaction = entidad.getTransaction();
+			transaction.begin();
+			
+			entidad.merge(publicacion);
+			transaction.commit();
+		} catch (Exception e) {
+			if(transaction != null && transaction.isActive()) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			entidad.close();
+		}
+	}
+	
+	public void eliminarPublicacion(int id) {
+		EntityManager entidad = devolverEntityManager();
+		EntityTransaction transaction = null;
+		
+		try {
+			transaction = entidad.getTransaction();
+			transaction.begin();
+			Publicacion publicacion = entidad.find(Publicacion.class, id);
+			
+			entidad.remove(publicacion);
+			
+			transaction.commit();
+		} catch (Exception e) {
+			if(transaction != null && transaction.isActive()) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			entidad.close();
+		}
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

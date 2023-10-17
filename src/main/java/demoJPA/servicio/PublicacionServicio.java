@@ -25,10 +25,28 @@ public class PublicacionServicio {
 		}
 	}
 	
-	public void mostrarPublicacion(int id) {
+	public Publicacion obtenerPublicacionPorId(int id) {
 		Publicacion publicacion = publicacionDao.obtenerPublicacionPorId(id);
 		
-		System.out.println(publicacion);
+		return publicacion;
+	}
+	
+	public void actualizarPublicacion(Publicacion publicacion) {
+		publicacionDao.actualizarPublicacion(publicacion);
+		System.out.println("La publicacion fue actualizada");
+	}
+	
+	public void eliminarPublicacion(int id) {
+		publicacionDao.eliminarPublicacion(id);
+		System.out.println("Publicacion eliminada");
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 }
